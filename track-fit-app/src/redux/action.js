@@ -57,9 +57,10 @@ export const addFood = (newFood)=>async(dispatch)=>{
             headers:{
                 "Content-type":"application/json"
             },
-            body:JSON.stringify(newFood);
+            body:JSON.stringify(newFood)
         })
         const data = await response.json();
+        console.log(data);
         if(data.success===true)
         {
             dispatch({type:"ADD_FOOD_SUCCESS",payload:data.addedFood});
@@ -69,5 +70,53 @@ export const addFood = (newFood)=>async(dispatch)=>{
     {
         console.log(error);
         dispatch({type:"ADD_FOOD_FAILURE"});
+    }
+}
+
+export const deleteExercise = (exerciseData) =>async(dispatch) =>{
+    dispatch({type:"SET_LOADING_TRUE"});
+    try{
+        const response = await fetch("https://fitness-tracker-backend.sarathkumarnall.repl.co/api/exercises",{
+                method:"DELETE",
+                headers:{
+                "Content-type":"application/json",
+                },
+                body:JSON.stringify(exerciseData)
+        })
+        const data = await response.json();
+        console.log(data);
+        if(data.success===true)
+        {
+            dispatch({type:"REMOVE_EXERCISE_SUCCESS",payload:data.deletedExercise});
+        }
+    }
+    catch(error)
+    {
+        console.log(error);
+        dispatch({type:"REMOVE_EXERCISE_FAILURE"});
+
+    }
+}
+
+export const deleteFood = (foodData) =>async(dispatch)=>
+{
+    try{
+        const response = await fetch("https://fitness-tracker-backend.sarathkumarnall.repl.co/api/food",{
+            method:"DELETE",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body:JSON.stringify(foodData)
+        });
+        const data = await response.json();
+        if(data.success===true)
+        {
+            dispatch({type:"REMOVE_FOOD_SUCCESS",payload:data.removedFood});
+        }
+    }
+    catch(error)
+    {
+        console.log(error);
+        dispatch({type:"REMOVE_FOOD_FAILURE"});
     }
 }

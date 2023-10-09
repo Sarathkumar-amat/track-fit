@@ -17,7 +17,7 @@ export function FoodForm()
             name:foodName,
             calories:parseInt(calories),
             protein:parseInt(protein),
-            carbohydrate:parent(carbohydrate),
+            carbohydrate:parseInt(carbohydrate),
             fat:parseInt(fat)
         }
         dispatch(addFood(foodObject));

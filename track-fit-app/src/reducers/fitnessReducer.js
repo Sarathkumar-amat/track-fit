@@ -25,6 +25,16 @@ export const fitnessReducer = (state=initialState,action) =>{
             return {...state,loading:false,error:"Error fetching food data"};
         case "ADD_FOOD_FAILURE":
             return {...state,loading:false,error:"Error adding food data"};
+        case "REMOVE_EXERCISE_SUCCESS":
+            return {...state,loading:false,error:null,exercise:state.exercise.filter((exercise)=>exercise._id!==action.payload._id)};
+        case "REMOVE_EXERCISE_FAILURE":
+            return {...state,loading:false,error:"Error in removing exercise"};
+        case "REMOVE_FOOD_SUCCESS":
+            return {...state,loading:false,error:null,food:state.food.filter((food)=>food._id!==action.payload._id)};
+        case "REMOVE_FOOD_FAILURE":
+            return {...state,loading:false,error:"Error removing food"};
+        case "SET_LOADING_TRUE":
+            return {...state,loading:true,error:null};
         default:
             return {...state};
     }
