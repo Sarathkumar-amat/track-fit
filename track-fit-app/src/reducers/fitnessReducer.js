@@ -19,8 +19,12 @@ export const fitnessReducer = (state=initialState,action) =>{
             return {...state,loading:false,error:"Error adding exercise"};
         case "FETCH_FOOD_SUCCESS":
             return {...state,loading:false,error:null,food:action.payload};
+        case "ADD_FOOD_SUCCESS":
+            return {...state,loading:false,error:null,food:[...state.food,action.payload]};
         case "FETCH_FOOD_FAILURE":
-            return {...state,loading:false,error:"Error fetching food data"}
+            return {...state,loading:false,error:"Error fetching food data"};
+        case "ADD_FOOD_FAILURE":
+            return {...state,loading:false,error:"Error adding food data"};
         default:
             return {...state};
     }

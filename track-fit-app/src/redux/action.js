@@ -27,7 +27,7 @@ export const addExercise = (newExercise)=> async (dispatch)=>{
         const data = await response.json();
         if(data.success===true)
         {
-            dispatch({type:"ADD_EXERCISE_SUCCESS",payload:data.exerciseData});
+            dispatch({type:"ADD_EXERCISE_SUCCESS",payload:data.exercise});
         }
     }
     catch(error)
@@ -47,5 +47,27 @@ export const fetchFood = () => async(dispatch) =>{
     {
         console.log(error);
         dispatch({ type: "FETCH_FOOD_FAILURE"});
+    }
+}
+
+export const addFood = (newFood)=>async(dispatch)=>{
+    try{
+        const response = await fetch("https://fitness-tracker-backend.sarathkumarnall.repl.co/api/food",{
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body:JSON.stringify(newFood);
+        })
+        const data = await response.json();
+        if(data.success===true)
+        {
+            dispatch({type:"ADD_FOOD_SUCCESS",payload:data.addedFood});
+        }
+    }
+    catch(error)
+    {
+        console.log(error);
+        dispatch({type:"ADD_FOOD_FAILURE"});
     }
 }
